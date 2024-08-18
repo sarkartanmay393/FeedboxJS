@@ -1,6 +1,6 @@
 {
   "name": "feedboxjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight React component for collecting user feedback. Includes customizable UI options, file attachments, and easy integration with your backend.",
   "main": "dist/src/index.js",
   "types": "dist/src/types/feedback.d.ts",
