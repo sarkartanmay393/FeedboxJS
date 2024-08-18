@@ -1,87 +1,47 @@
-import React, { useState } from 'react';
-import { Button } from '@/src/components/ui/button';
-import { Textarea } from '@/src/components/ui/textarea';
-import { Input } from '@/src/components/ui/input';
-import {
-  Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
-  SelectLabel,
-  SelectItem,
-} from '@/src/components/ui/select';
+'use client';
 
-export type FeedbackData = {
-  message: string;
-  email?: string;
-};
-
-export type FeedbackFormProps = {
-  onSend: (feedback: FeedbackData) => void;
-  placeholder?: string;
-  buttonText?: string;
-  className?: string;
-  styles?: React.CSSProperties;
-};
+import React from 'react';
+import { Input, Select, Form } from 'antd';
+import type { FeedbackFormProps } from '../types';
 
 export const FeedbackForm: React.FC<FeedbackFormProps> = ({
-  onSend,
   placeholder = 'Enter your feedback...',
-  buttonText = 'Send Feedback',
-  className,
-  styles,
+  className = '',
 }) => {
-  const [feedbackType, setFeedbackType] = useState('feedback_or_suggestion');
-  const [message, setMessage] = useState('');
-  const [email, setEmail] = useState('');
-
-  const handleSend = () => {
-    if (message.trim()) {
-      onSend({ message, email });
-      setMessage('');
-      setEmail('');
-    }
-  };
-
   return (
-    <div className={`flex flex-col gap-4 p-4 ${className}`} style={styles}>
-      
-      <Select defaultValue={feedbackType} onValueChange={setFeedbackType}>
-        <SelectTrigger className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <SelectValue placeholder="Select an option" />
-        </SelectTrigger>
-        <SelectGroup>
-          <SelectLabel>Select an option</SelectLabel>
-          <SelectItem value="feedback_or_suggestion">Feedback/Suggestion</SelectItem>
-          <SelectItem value="new_feature">New Feature</SelectItem>
-          <SelectItem value="bug_report">Bug Report</SelectItem>
-        </SelectGroup>
-      </Select>
-
-      <Input
-        type="email"
-        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Your email (optional)"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <Textarea
+    <div className={`flex flex-col gap-4 p-4 ${className}`}>
+      <Form.Item
         required
-        className="w-full p-2 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder={placeholder}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        rows={4}
-      />
-
-      <Button
-        className="p-2 mt-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
-        onClick={handleSend}
+        name="feedback_type"
+        label="Select feedback type: "
+        rules={[{ required: true, message: 'Please select an option' }]}
       >
-        {buttonText}
-      </Button>
+        <Select defaultValue="feedback_or_suggestion">
+          <Select.Option value="feedback_or_suggestion">Feedback/Suggestion</Select.Option>
+          <Select.Option value="new_feature">New Feature</Select.Option>
+          <Select.Option value="bug_report">Bug Report</Select.Option>
+        </Select>
+      </Form.Item>
 
+      <Form.Item label="Type email" name="email">
+        <Input
+          type="email"
+          placeholder="Your email (optional)"
+        />
+      </Form.Item>
+
+      <Form.Item
+        required
+        label="Type feedback"
+        name="message"
+        rules={[{ required: true, message: 'Please enter your feedback' }]}
+      >
+        <Input.TextArea
+          required
+          placeholder={placeholder}
+          rows={4}
+        />
+      </Form.Item>
     </div>
   );
 };
