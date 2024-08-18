@@ -2,8 +2,10 @@
   "name": "feedboxjs",
   "version": "1.0.0",
   "description": "A lightweight React component for collecting user feedback. Includes customizable UI options, file attachments, and easy integration with your backend.",
-  "main": "index.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/types/feedback.d.ts",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -28,5 +30,9 @@
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   }
 }
