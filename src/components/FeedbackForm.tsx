@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/src/components/ui/button';
+import { Textarea } from '@/src/components/ui/textarea';
+import { Input } from '@/src/components/ui/input';
 import {
   Select,
   SelectGroup,
@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectLabel,
   SelectItem,
-} from '@/components/ui/select';
+} from '@/src/components/ui/select';
 
 export type FeedbackData = {
   message: string;
